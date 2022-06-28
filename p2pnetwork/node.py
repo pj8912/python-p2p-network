@@ -119,7 +119,7 @@ class Node(threading.Thread):
         else:
             self.debug_print("Node send_to_node: Could not send the data, node is not found!")
 
-    def connect_with_node(self, host: str, port: int, reconnect: bool = False) -> bool:
+    def connect_with_node(self, host: str, port: int, id ,  reconnect: bool = False) -> bool:
         """Make a connection with another node that is running on host with port.
 
         When the connection is made, an event is triggered outbound_node_connected. When the connection is made with
@@ -127,8 +127,11 @@ class Node(threading.Thread):
         are connected to. When the connection is made the method outbound_node_connected is invoked. If reconnect is
         True, the node will try to reconnect to the code whenever the node connection was closed. The method returns
         True when the node is connected with the specific host."""
-
-        if host == self.host and port == self.port:
+        
+        #connected with based on diff 'id'
+        #most p2p networks use 'id' to differentiate nodes
+        
+        if id == self.id:
             print("connect_with_node: Cannot connect with yourself!!")
             return False
 
